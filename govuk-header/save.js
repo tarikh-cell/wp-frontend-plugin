@@ -7,21 +7,22 @@ export default function save({ attributes }) {
     return (
         <header {...blockProps} className="govuk-header" role="banner">
             <div className="govuk-header__container govuk-width-container">
+                
                 <div className="govuk-header__logo">
-                    <a href="/" className="govuk-header__link govuk-header__link--homepage">
+                    <span className="govuk-header__link govuk-header__link--homepage">
                         GOV.UK
-                    </a>
+                    </span>
                 </div>
 
                 <div className="govuk-header__content">
                     <RichText.Content
-                        tagName="a"
+                        tagName="span"
                         className="govuk-header__link govuk-header__service-name"
                         value={serviceName}
                     />
 
                     <nav>
-                        <ul className="govuk-header__navigation">
+                        <ul className="govuk-header__navigation govuk-header__navigation--end">
                             {links.map((link, index) => (
                                 <li
                                     key={index}
@@ -38,6 +39,7 @@ export default function save({ attributes }) {
                         </ul>
                     </nav>
                 </div>
+
             </div>
         </header>
     );

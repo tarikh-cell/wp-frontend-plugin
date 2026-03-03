@@ -15,9 +15,9 @@ export default function Edit({ attributes, setAttributes }) {
     const blockProps = useBlockProps();
 
     const updateLink = (index, field, value) => {
-        const newLinks = [...links];
-        newLinks[index][field] = value;
-        setAttributes({ links: newLinks });
+        const updated = [...links];
+        updated[index][field] = value;
+        setAttributes({ links: updated });
     };
 
     const addLink = () => {
@@ -67,15 +67,16 @@ export default function Edit({ attributes, setAttributes }) {
 
             <header {...blockProps} className="govuk-header" role="banner">
                 <div className="govuk-header__container govuk-width-container">
+                    
                     <div className="govuk-header__logo">
-                        <a href="/" className="govuk-header__link govuk-header__link--homepage">
+                        <span className="govuk-header__link govuk-header__link--homepage">
                             GOV.UK
-                        </a>
+                        </span>
                     </div>
 
                     <div className="govuk-header__content">
                         <RichText
-                            tagName="a"
+                            tagName="span"
                             className="govuk-header__link govuk-header__service-name"
                             value={serviceName}
                             onChange={(value) =>
@@ -85,7 +86,7 @@ export default function Edit({ attributes, setAttributes }) {
                         />
 
                         <nav>
-                            <ul className="govuk-header__navigation">
+                            <ul className="govuk-header__navigation govuk-header__navigation--end">
                                 {links.map((link, index) => (
                                     <li
                                         key={index}
@@ -102,6 +103,7 @@ export default function Edit({ attributes, setAttributes }) {
                             </ul>
                         </nav>
                     </div>
+
                 </div>
             </header>
         </>
