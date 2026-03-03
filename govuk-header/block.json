@@ -1,0 +1,15 @@
+{
+  "attributes": {
+    "serviceName": {
+      "type": "string",
+      "default": "Service name"
+    },
+    "links": {
+      "type": "array",
+      "default": [
+        { "text": "Navigation item 1", "url": "#" },
+        { "text": "Navigation item 2", "url": "#" }
+      ]
+    }
+  }
+}
