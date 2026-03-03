@@ -1,0 +1,13 @@
+{
+  "attributes": {
+    "links": {
+      "type": "array",
+      "default": [
+        { "text": "Help", "url": "#" },
+        { "text": "Cookies", "url": "#" },
+        { "text": "Contact", "url": "#" },
+        { "text": "Terms and conditions", "url": "#" }
+      ]
+    }
+  }
+}
