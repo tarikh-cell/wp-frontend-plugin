@@ -1,1 +1,1 @@
-.wp-block-create-block-govuk-document-layout{background-color:#21759b;color:#fff;padding:2px}
+.wp-block-create-block-govuk-document-layout{background-color:#21759b;color:#fff;padding:2px}.my-two-columns{display:grid;gap:2rem;grid-template-columns:1fr 1fr}.my-two-columns>.wp-block-group{width:100%}@media(max-width:768px){.my-two-columns{grid-template-columns:1fr}}

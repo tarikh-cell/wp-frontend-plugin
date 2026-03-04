@@ -10,3 +10,20 @@
 	color: #fff;
 	padding: 2px;
 }
+
+.my-two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.my-two-columns > .wp-block-group {
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .my-two-columns {
+        grid-template-columns: 1fr;
+    }
+}

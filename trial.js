@@ -1,38 +1,116 @@
-<?php
-/**
- * Title: GOV.UK 1/3 – 2/3 layout
- * Slug: yourtheme/govuk-one-third-two-thirds
- * Categories: layout
- * Description: GOV.UK grid layout with one-third and two-thirds columns.
- */
-?>
+import {
+    useBlockProps,
+    InspectorControls
+} from '@wordpress/block-editor';
+import {
+    PanelBody,
+    TextControl,
+    Button
+} from '@wordpress/components';
 
-<!-- wp:group {"className":"govuk-grid-row"} -->
-<div class="wp-block-group govuk-grid-row">
+export default function Edit({ attributes, setAttributes }) {
+    const { items } = attributes;
 
-    <!-- wp:group {"className":"govuk-grid-column-one-third"} -->
-    <div class="wp-block-group govuk-grid-column-one-third">
-        <!-- wp:heading -->
-        <h2>Sidebar heading</h2>
-        <!-- /wp:heading -->
+    const addItem = () => {
+        setAttributes({
+            items: [...items, { text: '', url: '' }]
+        });
+    };
 
-        <!-- wp:paragraph -->
-        <p>Add sidebar content here.</p>
-        <!-- /wp:paragraph -->
-    </div>
-    <!-- /wp:group -->
+    const updateItem = (index, field, value) => {
+        const newItems = [...items];
+        newItems[index][field] = value;
+        setAttributes({ items: newItems });
+    };
 
-    <!-- wp:group {"className":"govuk-grid-column-two-thirds"} -->
-    <div class="wp-block-group govuk-grid-column-two-thirds">
-        <!-- wp:heading -->
-        <h2>Main content heading</h2>
-        <!-- /wp:heading -->
+    const removeItem = (index) => {
+        const newItems = items.filter((_, i) => i !== index);
+        setAttributes({ items: newItems });
+    };
 
-        <!-- wp:paragraph -->
-        <p>Add main content here.</p>
-        <!-- /wp:paragraph -->
-    </div>
-    <!-- /wp:group -->
+    return (
+        <>
+            <InspectorControls>
+                <PanelBody title="Breadcrumb Links">
+                    {items.map((item, index) => (
+                        <div key={index}>
+                            <TextControl
+                                label="Text"
+                                value={item.text}
+                                onChange={(value) =>
+                                    updateItem(index, 'text', value)
+                                }
+                            />
+                            <TextControl
+                                label="URL"
+                                value={item.url}
+                                onChange={(value) =>
+                                    updateItem(index, 'url', value)
+                                }
+                            />
+                            <Button
+                                isDestructive
+                                onClick={() => removeItem(index)}
+                            >
+                                Remove
+                            </Button>
+                            <hr />
+                        </div>
+                    ))}
+                    <Button variant="primary" onClick={addItem}>
+                        Add Breadcrumb
+                    </Button>
+                </PanelBody>
+            </InspectorControls>
 
-</div>
-<!-- /wp:group -->
+            <nav
+                {...useBlockProps({ className: 'govuk-breadcrumbs' })}
+                aria-label="Breadcrumb"
+            >
+                <ol className="govuk-breadcrumbs__list">
+                    {items.map((item, index) => (
+                        <li
+                            key={index}
+                            className="govuk-breadcrumbs__list-item"
+                        >
+                            <a
+                                className="govuk-breadcrumbs__link"
+                                href={item.url}
+                            >
+                                {item.text || 'Breadcrumb'}
+                            </a>
+                        </li>
+                    ))}
+                </ol>
+            </nav>
+        </>
+    );
+}
+import { useBlockProps } from '@wordpress/block-editor';
+
+export default function save({ attributes }) {
+    const { items } = attributes;
+
+    return (
+        <nav
+            {...useBlockProps.save({ className: 'govuk-breadcrumbs' })}
+            aria-label="Breadcrumb"
+        >
+            <ol className="govuk-breadcrumbs__list">
+                {items.map((item, index) => (
+                    <li
+                        key={index}
+                        className="govuk-breadcrumbs__list-item"
+                    >
+                        <a
+                            className="govuk-breadcrumbs__link"
+                            href={item.url}
+                        >
+                            {item.text}
+                        </a>
+                    </li>
+                ))}
+            </ol>
+        </nav>
+    );
+}
